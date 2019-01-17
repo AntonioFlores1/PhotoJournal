@@ -8,13 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class PhotoJournalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+       
     }
 
-
+    @IBOutlet weak var ButtonPress: UIBarButtonItem!
+    
+    @IBAction func PlusButton(_ sender: Any) {
+      
+        
+    }
+    
 }
 
