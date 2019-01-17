@@ -10,21 +10,47 @@ import UIKit
 
 class DetailPhotoViewController: UIViewController {
 
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
+    
+    @IBOutlet weak var ImageView: UIImageView!
+    
+    private var ImagePickerViewController: UIImagePickerController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+      setUpImagePickerViewController()
+    }
+    private func setUpImagePickerViewController() {
+        ImagePickerViewController = UIImagePickerController()
+        ImagePickerViewController.delegate = self
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+            cameraButton.isEnabled  = false
 
-        // Do any additional setup after loading the view.
+        }
+
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func PhotoLibraryPressed(_ sender: UIBarButtonItem) {
+        present(ImagePickerViewController, animated: true, completion: nil)
     }
-    */
+    
+    
 
+}
+
+extension DetailPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            ImageView.image = image
+        } else {
+            print("Original Image is nil")
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

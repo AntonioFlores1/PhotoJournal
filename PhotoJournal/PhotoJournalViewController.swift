@@ -15,10 +15,10 @@ class PhotoJournalViewController: UIViewController {
        
     }
 
+    
     @IBOutlet weak var ButtonPress: UIBarButtonItem!
     
     @IBAction func PlusButton(_ sender: Any) {
-      
         
     }
     

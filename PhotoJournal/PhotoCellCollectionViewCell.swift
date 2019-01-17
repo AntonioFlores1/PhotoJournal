@@ -20,6 +20,13 @@ class PhotoCellCollectionViewCell: UICollectionViewCell {
     
     @IBAction func ButtonPressed(_ sender: Any) {
         
+        
+        
+//    let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+//    guard let vc = storyBoard.instantiateViewController(withIdentifier: "DetailPhoto") as? DetailPhotoViewController else {return}
+//        vc.modalPresentationStyle = .overCurrentContext
+////        vc.animal = groupAnimals[indexPath.row]
+//        present(vc, animated: true, completion: nil)
     }
     
     
