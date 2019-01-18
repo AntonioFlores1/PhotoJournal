@@ -27,7 +27,7 @@ final class PhotoModel {
         } else {
             print("\(fileName) doesn't exist")
         }
-        items = items.sorted{$0.date < $1.date}
+        items = items.sorted{$0.date > $1.date}
         return items
     }
     static func addItem(item: Item) {
@@ -36,7 +36,7 @@ final class PhotoModel {
         save()
     }
     
-    static func delete(item: Item, atIndex index: Int) {
+    static func delete(atIndex index: Int) {
         items.remove(at: index)
         save()
     }

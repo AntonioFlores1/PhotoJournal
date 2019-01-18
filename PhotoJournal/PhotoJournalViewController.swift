@@ -12,6 +12,12 @@ class PhotoJournalViewController: UIViewController {
 
     @IBOutlet weak var tableCollectionView: UICollectionView!
  
+    private var allJournalImages = PhotoModel.getItems(){
+        didSet {
+            tableCollectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        //tableCollectionView.delegate = self
@@ -37,14 +43,15 @@ class PhotoJournalViewController: UIViewController {
         let optionMenuController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         // Create UIAlertAction for UIAlertController
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: {
-            (alert: UIAlertAction ) -> Void in
-            print("File has been Deleteded")
-        })
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive){ (action) in
+            PhotoModel.delete(atIndex: sender.tag)
+            self.allJournalImages = PhotoModel.getItems()
+        }
         let editAction = UIAlertAction(title: "Edit", style: .default){ (action) in
             let secondStoryBoard = UIStoryboard(name:"Main",bundle:nil)
             let vc = secondStoryBoard.instantiateViewController(withIdentifier: "DetailPhoto") as! DetailPhotoViewController
             self.present(vc, animated: true, completion: nil)
+            
         }
         let shareAction = UIAlertAction(title: "Share", style: .default) { (action) in
             print("File has been Shared")
