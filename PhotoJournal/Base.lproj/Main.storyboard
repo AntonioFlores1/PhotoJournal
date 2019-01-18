@@ -24,7 +24,6 @@
                                     <barButtonItem systemItem="add" id="cOM-XQ-iIl">
                                         <connections>
                                             <action selector="PlusButton:" destination="BYZ-38-t0r" id="Wnc-VZ-0e4"/>
-                                            <segue destination="8qW-mb-MRe" kind="show" id="3MF-tY-yM6"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hnF-9r-dmr"/>

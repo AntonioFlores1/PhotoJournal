@@ -19,7 +19,7 @@ final class PhotoModel {
                 do {
                     items = try PropertyListDecoder().decode([Item].self, from: data)
                 } catch {
-                    print("Property list decoding erroe: \(error)")
+                    print("Property list decoding error: \(error)")
                 }
             } else {
                 print("data is nil")

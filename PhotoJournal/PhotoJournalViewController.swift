@@ -26,6 +26,9 @@ class PhotoJournalViewController: UIViewController {
     @IBOutlet weak var ButtonPress: UIBarButtonItem!
     
     @IBAction func PlusButton(_ sender: Any) {
+        let newstoryBoard = UIStoryboard(name:"Main",bundle: nil)
+        let vc = newstoryBoard.instantiateViewController(withIdentifier: "DetailPhoto") as! DetailPhotoViewController
+        present(vc, animated: true, completion: nil)
         
     }
     
@@ -34,15 +37,15 @@ class PhotoJournalViewController: UIViewController {
         let optionMenuController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         // Create UIAlertAction for UIAlertController
-        
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: {
             (alert: UIAlertAction ) -> Void in
             print("File has been Deleteded")
         })
-        let editAction = UIAlertAction(title: "Edit", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-        
-        })
+        let editAction = UIAlertAction(title: "Edit", style: .default){ (action) in
+            let secondStoryBoard = UIStoryboard(name:"Main",bundle:nil)
+            let vc = secondStoryBoard.instantiateViewController(withIdentifier: "DetailPhoto") as! DetailPhotoViewController
+            self.present(vc, animated: true, completion: nil)
+        }
         let shareAction = UIAlertAction(title: "Share", style: .default) { (action) in
             print("File has been Shared")
         }
@@ -50,7 +53,6 @@ class PhotoJournalViewController: UIViewController {
             (alert: UIAlertAction!) -> Void in
             print("Cancel")
         })
-        
         
         optionMenuController.addAction(editAction)
         optionMenuController.addAction(shareAction)

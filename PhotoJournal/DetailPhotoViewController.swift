@@ -47,7 +47,7 @@ private var itemDescriptionPlaceHolder = "Description"
                                           .withTimeZone,
                                           .withDashSeparatorInDate]
         let timestamp = isoDateFormatter.string(from: date)
-        guard let itemDescription = itemDescriptionTextView.text else {fatalError("Title, Description nil")}
+        guard let itemDescription = itemDescriptionTextView.text else {fatalError("Item, Description nil")}
         let item = Item.init(Photo: data!, description: itemDescription, createdAt: timestamp)
         PhotoModel.addItem(item: item)
         dismiss(animated: true, completion: nil)
