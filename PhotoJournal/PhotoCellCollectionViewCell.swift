@@ -18,7 +18,7 @@ class PhotoCellCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var ThreeDotButton: UIButton!
     
-    @IBAction func ButtonPressed(_ sender: Any) {
+
         
         
         
@@ -27,7 +27,6 @@ class PhotoCellCollectionViewCell: UICollectionViewCell {
 //        vc.modalPresentationStyle = .overCurrentContext
 ////        vc.animal = groupAnimals[indexPath.row]
 //        present(vc, animated: true, completion: nil)
-    }
     
     
     

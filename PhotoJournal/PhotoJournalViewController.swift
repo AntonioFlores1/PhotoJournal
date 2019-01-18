@@ -10,11 +10,18 @@ import UIKit
 
 class PhotoJournalViewController: UIViewController {
 
+    @IBOutlet weak var tableCollectionView: UICollectionView!
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+       //tableCollectionView.delegate = self
+       tableCollectionView.dataSource = self
+        print(DataPersistenceManager.documentsDirectory())
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        tableCollectionView.reloadData()
+    }
     
     @IBOutlet weak var ButtonPress: UIBarButtonItem!
     
@@ -22,5 +29,61 @@ class PhotoJournalViewController: UIViewController {
         
     }
     
+    @IBAction func editButton(_ sender: UIButton) {
+        
+        let optionMenuController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        // Create UIAlertAction for UIAlertController
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: {
+            (alert: UIAlertAction ) -> Void in
+            print("File has been Deleteded")
+        })
+        let editAction = UIAlertAction(title: "Edit", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+        
+        })
+        let shareAction = UIAlertAction(title: "Share", style: .default) { (action) in
+            print("File has been Shared")
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancel")
+        })
+        
+        
+        optionMenuController.addAction(editAction)
+        optionMenuController.addAction(shareAction)
+        optionMenuController.addAction(deleteAction)
+        optionMenuController.addAction(cancelAction)
+
+        self.present(optionMenuController, animated: true, completion: nil)
+        
+    }
+        
+        
+    }
+extension PhotoJournalViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return PhotoModel.getItems().count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = tableCollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? PhotoCellCollectionViewCell else {return UICollectionViewCell()}
+        let item = PhotoModel.getItems()[indexPath.row]
+        cell.PhotoImage.image = UIImage.init(data: item.Photo)
+        cell.DescriptionLabel.text = item.description
+        cell.DateLabel.text = item.dateFormattedString
+         return cell
 }
+   
+}
+
+//extension PhotoJournalViewController: UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        let item = PhotoModel.getItems()[indexPath.row]
+//        PhotoModel.delete(item: item, atIndex: indexPath.row)
+//        collectionView.deleteItems(at: [indexPath])
+//    }
+//}
 
